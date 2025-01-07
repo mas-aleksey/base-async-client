@@ -4,7 +4,7 @@ import logging
 import uuid
 from dataclasses import dataclass
 from time import monotonic
-from typing import Generic, Optional, TypeVar, Union
+from typing import Generic, TypeVar, Unpack
 
 import backoff
 from aiohttp import (
@@ -13,6 +13,7 @@ from aiohttp import (
     ClientSession,
     ClientTimeout,
 )
+from aiohttp.client import _RequestOptions
 from multidict import CIMultiDictProxy
 from pydantic import BaseModel, ValidationError
 
@@ -26,7 +27,7 @@ T_CONFIG = TypeVar("T_CONFIG", bound=ClientConfig)
 @dataclass
 class Response:
     headers: CIMultiDictProxy[str]
-    body: Optional[bytes]
+    body: bytes
 
 
 class BaseClient(Generic[T_CONFIG]):
@@ -174,7 +175,7 @@ class BaseClient(Generic[T_CONFIG]):
         max_tries=MAX_RETRY,
     )
     async def _perform_request(
-        self, method: str, url: str, **kwargs: Union[str, bool, int]
+        self, method: str, url: str, **kwargs: Unpack[_RequestOptions]
     ) -> Response:
         """
         Performs an HTTP request with the given method and URL,

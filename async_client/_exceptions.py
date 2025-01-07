@@ -6,7 +6,7 @@ class BaseError(Exception):
 
     default_msg = "Unknown error"
 
-    def __init__(self, message: Optional[str] = None, extra: str = None) -> None:
+    def __init__(self, message: Optional[str] = None, extra: Optional[str] = None) -> None:
         self.message = message or self.default_msg
         if extra:
             self.message = f"{self.message}, info: {extra}"
