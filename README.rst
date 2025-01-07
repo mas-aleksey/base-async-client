@@ -18,8 +18,8 @@ with methods for making requests, handling responses, and parsing data.
 
 Examples
 ========
-
 .. code-block:: python
+
     from pydantic import BaseModel
     from async_client import BaseClient, ClientConfig
 
