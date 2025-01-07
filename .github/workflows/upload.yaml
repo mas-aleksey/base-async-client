@@ -1,0 +1,17 @@
+name: Upload python to twine
+
+on:
+  push:
+    branches:
+    - master
+    - releases/*
+
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - uses: yaananth/twine-upload@v1
+      env:
+        RUNNER: ${{ toJson(runner) }}
+        SECRETS: ${{ toJson(secrets) }}

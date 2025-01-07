@@ -1,0 +1,48 @@
+[tool.poetry]
+name = "base-client"
+version = "0.1.0"
+description = "Asynchronous HTTP client"
+authors = ["Aleksey Matyunin <matyunin.as@mail.ru>"]
+license = "MIT"
+readme = "README.md"
+packages = [
+    { include = "base_client" },
+]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+aiohttp = "^3.8.4"
+backoff = "^2.2.1"
+pydantic = "^2.10.0"
+pydantic_settings = "^2.5.1"
+
+[tool.poetry.group.dev.dependencies]
+aioresponses = "^0.7.6"
+black = "^24.1.1"
+mypy = "^0.942"
+pre-commit = "^3.3.2"
+pytest = "^8.3.4"
+pytest-asyncio = "^0.21.0"
+pytest-cov = "^4.0.0"
+ruff = "^0.2.1"
+
+[tool.black]
+line-length = 100
+target-version = ["py311"]
+preview = true
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+lint.select = ["E", "W", "T", "C90", "I", "N", "ANN", "S", "B", "A", "PL", "PTH", "F", "ARG"]
+lint.ignore = ["ANN101"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["S101", "ANN001", "ANN201"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
