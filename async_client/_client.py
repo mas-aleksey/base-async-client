@@ -13,11 +13,10 @@ from aiohttp import (
     ClientSession,
     ClientTimeout,
 )
-from multidict import CIMultiDictProxy
-from pydantic import BaseModel, ValidationError
-
 from base_client._exceptions import BaseError, ClientError
 from base_client._settnigs import MAX_RETRY, ClientConfig
+from multidict import CIMultiDictProxy
+from pydantic import BaseModel, ValidationError
 
 T_SCHEMA = TypeVar("T_SCHEMA", bound=BaseModel)
 T_CONFIG = TypeVar("T_CONFIG", bound=ClientConfig)

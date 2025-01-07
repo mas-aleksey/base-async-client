@@ -1,0 +1,16 @@
+name: Upload python to twine
+
+on:
+  push:
+    branches:
+    - main
+    - releases/*
+
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Build and publish to pypi
+      uses: JRubics/poetry-publish@v2.0
+      with:
+        pypi_token: ${{ secrets.token }}

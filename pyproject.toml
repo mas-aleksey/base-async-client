@@ -1,12 +1,12 @@
 [tool.poetry]
-name = "base-client"
+name = "async_client"
 version = "0.1.0"
 description = "Asynchronous HTTP client"
 authors = ["Aleksey Matyunin <matyunin.as@mail.ru>"]
 license = "MIT"
 readme = "README.md"
 packages = [
-    { include = "base_client" },
+    { include = "async_client" },
 ]
 
 [tool.poetry.dependencies]
