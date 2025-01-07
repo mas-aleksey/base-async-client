@@ -19,33 +19,31 @@ with methods for making requests, handling responses, and parsing data.
 Examples
 ========
 
-```python
-from pydantic import BaseModel
-from async_client import BaseClient, ClientConfig
+.. code-block:: python
+    from pydantic import BaseModel
+    from async_client import BaseClient, ClientConfig
 
 
-class TestSchema(BaseModel):
-    some: str
-    data: str
+    class TestSchema(BaseModel):
+        some: str
+        data: str
 
 
-class TestClient(BaseClient):
+    class TestClient(BaseClient):
 
-    async def get_data(self) -> TestSchema:
-        url = self.get_path("data")
-        resp = await self._perform_request("GET", url)
-        data = self.load_schema(resp.body, TestSchema)
-        return data
-
-
-async def main():
-    config = ClientConfig(HOST="http://127.0.0.1:8010", CLIENT_TIMEOUT=1)
-    async with TestClient(config) as client:
-        result = await client.get_data()
+        async def get_data(self) -> TestSchema:
+            url = self.get_path("data")
+            resp = await self._perform_request("GET", url)
+            data = self.load_schema(resp.body, TestSchema)
+            return data
 
 
-if __name__ == "__main__":
-    import asyncio
-    asyncio.run(main())
+    async def main():
+        config = ClientConfig(HOST="http://127.0.0.1:8010", CLIENT_TIMEOUT=1)
+        async with TestClient(config) as client:
+            result = await client.get_data()
 
-```
+
+    if __name__ == "__main__":
+        import asyncio
+        asyncio.run(main())
