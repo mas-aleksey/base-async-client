@@ -59,7 +59,7 @@ jobs:
       - name: Install dependencies
         run: |
           pip install --upgrade pip poetry
-          poetry config virtualenvs.create false || true && poetry install --no-root
+          poetry config virtualenvs.create false || true && poetry install
 
       - name: test
         run: |
