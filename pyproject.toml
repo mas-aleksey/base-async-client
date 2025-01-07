@@ -4,7 +4,7 @@ version = "0.1.2"
 description = "Asynchronous HTTP client"
 authors = ["Aleksey Matyunin <matyunin.as@mail.ru>"]
 license = "MIT"
-readme = "README.md"
+readme = "README.rst"
 packages = [
     { include = "async_client" },
 ]
