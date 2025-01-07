@@ -4,7 +4,7 @@ import logging
 import uuid
 from dataclasses import dataclass
 from time import monotonic
-from typing import Generic, TypeVar
+from typing import Generic, Optional, TypeVar
 
 import backoff
 from aiohttp import (
@@ -26,7 +26,7 @@ T_CONFIG = TypeVar("T_CONFIG", bound=ClientConfig)
 @dataclass
 class Response:
     headers: CIMultiDictProxy[str]
-    body: bytes | None
+    body: Optional[bytes]
 
 
 class BaseClient(Generic[T_CONFIG]):
