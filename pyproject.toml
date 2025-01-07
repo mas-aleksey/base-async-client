@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "async_client"
+name = "async-client"
 version = "0.1.0"
 description = "Asynchronous HTTP client"
 authors = ["Aleksey Matyunin <matyunin.as@mail.ru>"]

@@ -7,6 +7,64 @@ on:
     - releases/*
 
 jobs:
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip poetry
+          poetry config virtualenvs.create false || true && poetry install --no-root
+
+      - name: Lint
+        run: |
+          ruff check .
+          black --check . --preview
+#
+#      - name: Pyright
+#        run: |
+#          pyright
+
+    test:
+      name: test py${{ matrix.python }} on ${{ matrix.os }}
+      runs-on: ${{ matrix.os }}
+      strategy:
+        fail-fast: false
+        matrix:
+          include:
+            - python: '3.9'
+              os: macos-latest
+            - python: '3.10'
+              os: ubuntu-latest
+            - python: '3.11'
+              os: ubuntu-latest
+            - python: '3.11'
+              os: macos-latest
+
+      steps:
+        - uses: actions/checkout@v4
+
+        - name: Set up python
+          uses: actions/setup-python@v4
+          with:
+            python-version: ${{ matrix.python }}
+
+        - name: Install dependencies
+          run: |
+            pip install --upgrade pip poetry
+            poetry config virtualenvs.create false || true && poetry install --no-root
+
+        - name: test
+          run: |
+            poetry run pytest tests --cov=async_client --cov-report=xml --cov-report=term --cov-branch
+
   build:
     runs-on: ubuntu-latest
     steps:
