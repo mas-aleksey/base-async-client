@@ -1,6 +1,7 @@
 import pytest
-from _exceptions import BaseError, ClientError
 from aioresponses import aioresponses
+
+from async_client._exceptions import BaseError, ClientError
 
 
 async def test_get_data_200(client):
