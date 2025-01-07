@@ -1,7 +1,7 @@
 Asynchronous HTTP client
 =======
 
-[![build](https://travis-ci.org/mas-aleksey/async-client.svg)](https://travis-ci.org/mas-aleksey/async-client)
+[![build](https://github.com/mas-aleksey/async-client/workflows/Publish/badge.svg)](https://github.com/mas-aleksey/async-client/actions?query=workflow%3A%22publish%22)
 [![coverage](https://coveralls.io/repos/mas-aleksey/async-client/badge.svg)](https://coveralls.io/r/mas-aleksey/async-client?branch=python-3)
 [![codeql](https://github.com/mas-aleksey/async-client/workflows/CodeQL/badge.svg)](https://github.com/mas-aleksey/async-client/actions/workflows/codeql-analysis.yml)
 [![pypi](https://img.shields.io/pypi/v/async-client-lib.svg)](https://pypi.python.org/pypi/async-client-lib)

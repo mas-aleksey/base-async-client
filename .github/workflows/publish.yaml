@@ -1,4 +1,4 @@
-name: Upload python to pypi
+name: "Publish"
 
 permissions:
   actions: read
