@@ -1,0 +1,13 @@
+language: python
+python:
+  - "3.9"
+  - "3.10"
+  - "3.11"
+before_install:
+  - pip install poetry more-itertools
+install:
+  - poetry install
+script: poetry run make check
+after_success: coveralls
+notifications:
+  email: false
