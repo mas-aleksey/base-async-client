@@ -3,8 +3,9 @@ from logging import config as logger_config
 
 import pytest
 import pytest_asyncio
-from base_client import BaseClient, ClientConfig
 from pydantic import BaseModel
+
+from async_client import BaseClient, ClientConfig
 
 
 class TestSchema(BaseModel):

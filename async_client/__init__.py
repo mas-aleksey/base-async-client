@@ -1,8 +1,8 @@
 import logging
 
-from base_client._client import BaseClient
-from base_client._exceptions import BaseError, ClientError
-from base_client._settnigs import ClientConfig
+from async_client._client import BaseClient
+from async_client._exceptions import BaseError, ClientError
+from async_client._settnigs import ClientConfig
 
 logging.basicConfig(
     level=logging.INFO,

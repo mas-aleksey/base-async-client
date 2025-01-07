@@ -13,10 +13,10 @@ all:
 	@echo 'check             make sure you are ready to commit'
 
 flake8:
-	@flake8 --ignore=E741,W503,W504 base_client tests
+	@flake8 --ignore=E741,W503,W504 async_client tests
 
 mypy:
-	@mypy --show-error-codes base_client tests
+	@mypy --show-error-codes async_client tests
 
 clean:
 	@find . -name "*.pyc" -delete
@@ -24,7 +24,7 @@ clean:
 	@rm -rf build dist .coverage MANIFEST
 
 test: clean
-	@PYTHONPATH=. py.test --cov-report term-missing --cov base_client tests
+	@PYTHONPATH=. py.test --cov-report term-missing --cov async_client tests
 
 check: flake8 mypy test
 	@coverage report | grep ^TOTAL | grep 100% >/dev/null || \
