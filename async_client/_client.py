@@ -4,7 +4,7 @@ import logging
 import uuid
 from dataclasses import dataclass
 from time import monotonic
-from typing import Generic, Optional, TypeVar
+from typing import Generic, Optional, TypeVar, Union
 
 import backoff
 from aiohttp import (
@@ -103,7 +103,9 @@ class BaseClient(Generic[T_CONFIG]):
         (ClientConnectionError, ClientError),
         max_tries=MAX_RETRY,
     )
-    async def _perform_request(self, method: str, url: str, **kwargs: str | bool) -> Response:
+    async def _perform_request(
+        self, method: str, url: str, **kwargs: Union[str, bool, int]
+    ) -> Response:
         kwargs.setdefault("ssl", self.config.SSL_VERIFY)
         start_time = monotonic()
         status_code = 500
