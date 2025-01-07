@@ -4,7 +4,7 @@ import logging
 import uuid
 from dataclasses import dataclass
 from time import monotonic
-from typing import Generic, TypeVar, Unpack
+from typing import Any, Generic, TypeVar
 
 import backoff
 from aiohttp import (
@@ -13,7 +13,6 @@ from aiohttp import (
     ClientSession,
     ClientTimeout,
 )
-from aiohttp.client import _RequestOptions
 from multidict import CIMultiDictProxy
 from pydantic import BaseModel, ValidationError
 
@@ -174,9 +173,7 @@ class BaseClient(Generic[T_CONFIG]):
         (ClientConnectionError, ClientError),
         max_tries=MAX_RETRY,
     )
-    async def _perform_request(
-        self, method: str, url: str, **kwargs: Unpack[_RequestOptions]
-    ) -> Response:
+    async def _perform_request(self, method: str, url: str, **kwargs: dict[str, Any]) -> Response:
         """
         Performs an HTTP request with the given method and URL,
         and retries the request if a connection error or client error occurs.
