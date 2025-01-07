@@ -1,5 +1,8 @@
 name: Upload python to pypi
 
+permissions:
+  actions: read
+
 on:
   push:
     branches:
@@ -66,7 +69,7 @@ jobs:
           poetry run pytest tests --cov=async_client --cov-report=xml --cov-report=term --cov-branch
 
   build:
-    needs: test
+    needs: lint, test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
