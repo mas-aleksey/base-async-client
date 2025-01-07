@@ -69,7 +69,7 @@ jobs:
           poetry run pytest tests --cov=async_client --cov-report=xml --cov-report=term --cov-branch
 
   build:
-    needs: lint, test
+    needs: [lint, test]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
