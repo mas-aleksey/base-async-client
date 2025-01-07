@@ -3,7 +3,7 @@ name: Upload python to twine
 on:
   push:
     branches:
-    - master
+    - main
     - releases/*
 
 jobs:
