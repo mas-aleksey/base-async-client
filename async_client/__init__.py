@@ -1,3 +1,10 @@
+# coding:utf-8
+"""
+Asynchronous HTTP client
+
+This module provides BaseClient class for building asynchronous HTTP clients,
+with methods for making requests, handling responses, and parsing data.
+"""
 import logging
 
 from async_client._client import BaseClient

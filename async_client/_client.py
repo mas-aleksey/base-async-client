@@ -32,6 +32,18 @@ class Response:
 class BaseClient(Generic[T_CONFIG]):
 
     def __init__(self, config: T_CONFIG) -> None:
+        """
+        Initializes a new instance of the BaseClient class.
+
+        Args:
+            config (T_CONFIG): The configuration object for the client.
+
+        Returns:
+            None
+
+        The session object is created with a timeout value set to the CLIENT_TIMEOUT
+        value from the configuration object.
+        """
         self._config = config
         self.logger = logging.getLogger(self.name)
         self.session = ClientSession(timeout=ClientTimeout(total=self.config.CLIENT_TIMEOUT))
@@ -58,11 +70,39 @@ class BaseClient(Generic[T_CONFIG]):
         return self.config.HOST.strip("/")
 
     def get_path(self, url: str) -> str:
+        """
+        Returns the full path by combining the base path and the given URL.
+
+        Args:
+            url (str): The URL to be appended to the base path.
+
+        Returns:
+            str: The full path by combining the base path and the given URL.
+
+        Example:
+            >>> config = ClientConfig(HOST="https://example.com")
+            >>> client = BaseClient(config)
+            >>> client.get_path("/api/users")
+            'https://example.com/api/users'
+        """
         url = url.lstrip("/")
         return f"{self.base_path}/{url}"
 
     @staticmethod
     def load_schema(data: bytes, schema: type[T_SCHEMA]) -> T_SCHEMA:
+        """
+        Parses the given bytes data using the specified schema and returns the parsed object.
+
+        Args:
+            data (bytes): The bytes data to be parsed.
+            schema (type[T_SCHEMA]): The schema class used to parse the data.
+
+        Returns:
+            T_SCHEMA: The parsed object.
+
+        Raises:
+            BaseError: If there is a validation error during parsing.
+        """
         try:
             return schema.parse_raw(data)
         except ValidationError as exc:
@@ -73,6 +113,22 @@ class BaseClient(Generic[T_CONFIG]):
 
     @staticmethod
     async def _raise_for_status(resp: ClientResponse) -> None:
+        """
+        Raises an exception if the response status is not in the range of good statuses (200-204).
+        If the status is in the range of request exceptions (400-499),
+        raises a `BaseError` with the error message and content of the response.
+        If the status is not handled, raises a `ClientError` with content of the response.
+
+        Args:
+            resp (ClientResponse): The response object to check the status of.
+
+        Raises:
+            BaseError: If the response status is in the range of request exceptions.
+            ClientError: If the response status is not handled.
+
+        Returns:
+            None
+        """
         # good statuses -> return
         if resp.status in (200, 201, 202, 204):
             return
@@ -88,6 +144,20 @@ class BaseClient(Generic[T_CONFIG]):
         raise ClientError(error_msg, content)
 
     async def _handle_response(self, resp: ClientResponse, request_info: dict) -> Response:
+        """
+        Handles the response from the API call.
+
+        Args:
+            resp (ClientResponse): The response object from the API call.
+            request_info (dict): Information about the request.
+
+        Returns:
+            Response: The parsed response object.
+
+        Raises:
+            BaseError: If the response status is in the range of request exceptions.
+            ClientError: If the response status is not handled.
+        """
         await self._raise_for_status(resp)
         body = await resp.read()
         self.logger.debug(
@@ -106,6 +176,21 @@ class BaseClient(Generic[T_CONFIG]):
     async def _perform_request(
         self, method: str, url: str, **kwargs: Union[str, bool, int]
     ) -> Response:
+        """
+        Performs an HTTP request with the given method and URL,
+        and retries the request if a connection error or client error occurs.
+
+        Args:
+            method (str): The HTTP method to use for the request.
+            url (str): The URL to send the request to.
+            **kwargs: Additional keyword arguments to pass to the request.
+
+        Returns:
+            Response: The response object containing the headers and body of the request.
+
+        Raises:
+            ClientError: If the request times out or encounters a client error.
+        """
         kwargs.setdefault("ssl", self.config.SSL_VERIFY)
         start_time = monotonic()
         status_code = 500
