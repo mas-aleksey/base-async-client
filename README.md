@@ -21,23 +21,23 @@ from pydantic import BaseModel
 from async_client import BaseClient, ClientConfig
 
 
-class Slideshow(BaseModel):
+class SlideShow(BaseModel):
     title: str
     author: str
     date: str
     slides: List[Dict]
 
 
-class SlideshowResponse(BaseModel):
-    slideshow: Slideshow
+class SlideShowResponse(BaseModel):
+    slideshow: SlideShow
 
 
 class HttpBinClient(BaseClient):
 
-    async def get_json(self) -> Slideshow:
+    async def get_json(self) -> SlideShow:
         url = self.get_path("json")
         resp = await self._perform_request("GET", url)
-        data = self.load_schema(resp.body, SlideshowResponse)
+        data = self.load_schema(resp.body, SlideShowResponse)
         return data.slideshow
 
 
