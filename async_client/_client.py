@@ -4,7 +4,7 @@ import logging
 import uuid
 from dataclasses import dataclass
 from time import monotonic
-from typing import Any, Generic, TypeVar
+from typing import Generic, TypeVar
 
 import backoff
 from aiohttp import (
@@ -173,7 +173,7 @@ class BaseClient(Generic[T_CONFIG]):
         (ClientConnectionError, ClientError),
         max_tries=MAX_RETRY,
     )
-    async def _perform_request(self, method: str, url: str, **kwargs: dict[str, Any]) -> Response:
+    async def _perform_request(self, method: str, url: str, **kwargs) -> Response:  # noqa: ANN003
         """
         Performs an HTTP request with the given method and URL,
         and retries the request if a connection error or client error occurs.

@@ -10,36 +10,50 @@ Asynchronous HTTP client
 This module provides BaseClient class for building asynchronous HTTP clients,
 with methods for making requests, handling responses, and parsing data.
 
-Examples
+Example
 ========
 
 ```python
 
+from typing import List, Dict
 from pydantic import BaseModel
+
 from async_client import BaseClient, ClientConfig
 
 
-class TestSchema(BaseModel):
-    some: str
-    data: str
+class Slideshow(BaseModel):
+    title: str
+    author: str
+    date: str
+    slides: List[Dict]
 
 
-class TestClient(BaseClient):
+class SlideshowResponse(BaseModel):
+    slideshow: Slideshow
 
-    async def get_data(self) -> TestSchema:
-        url = self.get_path("data")
+
+class HttpBinClient(BaseClient):
+
+    async def get_json(self) -> Slideshow:
+        url = self.get_path("json")
         resp = await self._perform_request("GET", url)
-        data = self.load_schema(resp.body, TestSchema)
-        return data
+        data = self.load_schema(resp.body, SlideshowResponse)
+        return data.slideshow
 
 
 async def main():
-    config = ClientConfig(HOST="http://127.0.0.1:8010", CLIENT_TIMEOUT=1)
-    async with TestClient(config) as client:
-        result = await client.get_data()
+    config = ClientConfig(
+        HOST="https://httpbin.org",
+        SSL_VERIFY=True,
+        CLIENT_TIMEOUT=30,
+    )
+    async with HttpBinClient(config) as client:
+        slideshow = await client.get_json()
+        print(slideshow)
 
 
 if __name__ == "__main__":
     import asyncio
     asyncio.run(main())
+
 ```
