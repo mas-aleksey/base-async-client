@@ -118,6 +118,6 @@ MIT License
 Aleksey Matyunin
 - Email: matyunin.as@mail.ru
 ## 🔖 Version
-Current version: 0.1.7
+Current version: 0.1.8
 ---
 **Note**: Always refer to the latest documentation and release notes for the most up-to-date information.

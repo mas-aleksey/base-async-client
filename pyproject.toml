@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "async-client-lib"
-version = "0.1.7"
+version = "0.1.8"
 description = "Asynchronous HTTP client"
 authors = ["Aleksey Matyunin <matyunin.as@mail.ru>"]
 license = "MIT"
@@ -13,7 +13,7 @@ packages = [
 python = "^3.9"
 aiohttp = "^3.8.4"
 backoff = "^2.2.1"
-pydantic = "^2.10.0"
+pydantic = "^2.10.4"
 pydantic_settings = "^2.5.1"
 
 [tool.poetry.group.dev.dependencies]
