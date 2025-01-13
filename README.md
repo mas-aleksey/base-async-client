@@ -1,4 +1,11 @@
 # Async Client Library
+
+[![publish](https://github.com/mas-aleksey/async-client/workflows/Build/badge.svg)](https://github.com/mas-aleksey/async-client/actions?query=workflow%3A%22build%22)
+[![coverage](https://coveralls.io/repos/mas-aleksey/async-client/badge.svg)](https://coveralls.io/r/mas-aleksey/async-client?branch=python-3)
+[![codeql](https://github.com/mas-aleksey/async-client/workflows/CodeQL/badge.svg)](https://github.com/mas-aleksey/async-client/actions/workflows/codeql-analysis.yml)
+[![pypi](https://img.shields.io/pypi/v/async-client-lib.svg)](https://pypi.python.org/pypi/async-client-lib)
+[![license](https://img.shields.io/github/license/mas-aleksey/async-client)](https://github.com/mas-aleksey/async-client/blob/main/LICENSE)
+
 ## 🚀 Project Overview
 `async-client-lib` is a sophisticated Python asynchronous HTTP client library designed to provide efficient, flexible, and robust HTTP request handling. Leveraging modern Python packaging tools and best practices, this library offers a comprehensive solution for building resilient network communication interfaces.
 ## 🛠 Technology Stack
