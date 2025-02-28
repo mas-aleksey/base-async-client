@@ -8,6 +8,7 @@
 
 ## 🚀 Project Overview
 `async-client-lib` is a sophisticated Python asynchronous HTTP client library designed to provide efficient, flexible, and robust HTTP request handling. Leveraging modern Python packaging tools and best practices, this library offers a comprehensive solution for building resilient network communication interfaces.
+
 ## 🛠 Technology Stack
 ### Core Technologies
 - **Language**: Python 3.9+
@@ -21,6 +22,7 @@
   - Formatting: Black
   - Linting: Ruff
   - Type Checking: mypy
+
 ## 📂 Project Structure
 ```
 async-client-main/

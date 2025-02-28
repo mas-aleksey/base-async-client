@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "async-client-lib"
-version = "0.1.8"
+version = "0.1.9"
 description = "Asynchronous HTTP client"
 authors = ["Aleksey Matyunin <matyunin.as@mail.ru>"]
 license = "MIT"

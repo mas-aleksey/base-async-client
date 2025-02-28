@@ -106,7 +106,10 @@ class BaseClient(Generic[T_CONFIG]):
         try:
             return schema.parse_raw(data)
         except ValidationError as exc:
-            errors = [f"'{'.'.join(error['loc'])}' - {error['msg']}" for error in exc.errors()]
+            errors = [
+                f"'{'.'.join([str(loc) for loc in error['loc']])}' - {error['msg']}"
+                for error in exc.errors()
+            ]
             raise BaseError(
                 f"ValidationError in '{schema.__name__}': {', '.join(errors)}. input: {data}"
             ) from exc
